@@ -95,16 +95,11 @@ namespace FooBarVSIXProject
         { get; set; }
 
         [Category("General")]
-        [DisplayName("Baz")]
+        [DisplayName("Bazes")]
         [Description("Bla Baz Bla")]
         [TypeConverter(typeof(IntArrayConverter))]
-        public int[] Baz
+        public int[] Bazes
         { get; set; }
-
-        public override void SaveSettingsToStorage()
-        {
-            base.SaveSettingsToStorage();
-        }
     }
 
     public class StringArrayConverter : TypeConverter
@@ -185,18 +180,13 @@ namespace FooBarVSIXProject
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            string v = value as string;
-
+            var v = value as string;
             return int.Parse(v.TrimStart('*'));
         }
 
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             var v = (int)value;
-            if (destinationType != typeof(string))
-            {
-                return base.ConvertTo(context, culture, value, destinationType);
-            }
             return v.ToString().PadLeft(25, '*');
         }
     }
