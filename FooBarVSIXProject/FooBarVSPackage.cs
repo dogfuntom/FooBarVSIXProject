@@ -113,7 +113,9 @@ namespace FooBarVSIXProject
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            return destinationType == typeof(string[]) || base.CanConvertTo(context, destinationType);
+            // This version is more correct, but doesn't change anything anyway.
+            return destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
+            //return destinationType == typeof(string[]) || base.CanConvertTo(context, destinationType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
